@@ -27,6 +27,7 @@ export function parseMarkdownFile(raw, fallbackSlug) {
     title: frontmatter.title || fallbackSlug,
     date: frontmatter.date || '',
     summary: frontmatter.summary || '',
+    status: frontmatter.status || '',
     tags: parseList(frontmatter.tags),
     body,
     html: renderMarkdown(body),
@@ -34,7 +35,8 @@ export function parseMarkdownFile(raw, fallbackSlug) {
 }
 
 export function renderMarkdown(source) {
-  return markdown.render(source)
+  const rendered = markdown.render(source)
+  return transformCallouts(rendered)
 }
 
 const markdown = new MarkdownIt({
@@ -115,4 +117,24 @@ function parseList(value = '') {
     .split(',')
     .map((item) => item.trim().replace(/^["']|["']$/g, ''))
     .filter(Boolean)
+}
+
+function transformCallouts(html) {
+  const calloutTypes = new Set(['note', 'warning', 'architecture', 'tradeoff', 'insight'])
+
+  return html.replace(
+    /<blockquote>\s*<p>\[!([A-Za-z]+)\]\s*([\s\S]*?)<\/p>([\s\S]*?)<\/blockquote>/g,
+    (_, rawType, firstLineContent, restBody) => {
+      const type = rawType.toLowerCase()
+      if (!calloutTypes.has(type)) {
+        return _
+      }
+
+      const title = type.charAt(0).toUpperCase() + type.slice(1)
+      const firstParagraph = firstLineContent.trim()
+      const body = `${firstParagraph ? `<p>${firstParagraph}</p>` : ''}${restBody || ''}`
+
+      return `<aside class="md-callout md-callout-${type}"><div class="md-callout-title">${title}</div><div class="md-callout-body">${body}</div></aside>`
+    },
+  )
 }

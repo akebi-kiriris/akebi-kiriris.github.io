@@ -16,7 +16,7 @@ const note = computed(() => findNote(props.slug))
 </script>
 
 <template>
-  <main class="content-shell max-w-205 py-10 md:py-16">
+  <main class="reading-shell py-10 md:py-16">
     <RouterLink
       class="inline-flex min-h-11 items-center rounded-sm px-3 text-sm font-semibold text-clay no-underline transition hover:bg-paper-soft"
       to="/notes"

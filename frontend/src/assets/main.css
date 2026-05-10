@@ -124,7 +124,13 @@
 
 @layer components {
   .content-shell {
-    @apply mx-auto w-full max-w-[1120px] px-4 md:px-8;
+    @apply mx-auto w-full max-w-375 px-4 md:px-8;
+  }
+
+  .reading-shell {
+    width: min(100%, clamp(920px, 84vw, 1360px));
+    margin-inline: auto;
+    padding-inline: clamp(0.9rem, 2.2vw, 2rem);
   }
 
   .surface-panel {
@@ -212,5 +218,122 @@
   .code-block pre.hljs {
     @apply m-0 rounded-none border-0 p-4;
     background: #f5f8f9;
+  }
+
+  .md-callout {
+    @apply mt-6 rounded-md border px-4 py-3;
+    background: color-mix(in srgb, var(--paper) 88%, white 12%);
+  }
+
+  .md-callout-title {
+    @apply text-xs font-bold uppercase tracking-[0.08em];
+  }
+
+  .md-callout-body {
+    @apply mt-2;
+  }
+
+  .md-callout-body > * + * {
+    @apply mt-2;
+  }
+
+  .md-callout-note {
+    border-color: #7cb2bf;
+  }
+
+  .md-callout-note .md-callout-title {
+    color: #2a6e7e;
+  }
+
+  .md-callout-warning {
+    border-color: #d2a061;
+  }
+
+  .md-callout-warning .md-callout-title {
+    color: #8c5c1b;
+  }
+
+  .md-callout-architecture {
+    border-color: #7e96b5;
+  }
+
+  .md-callout-architecture .md-callout-title {
+    color: #2f4f7d;
+  }
+
+  .md-callout-tradeoff {
+    border-color: #af87b7;
+  }
+
+  .md-callout-tradeoff .md-callout-title {
+    color: #6f4778;
+  }
+
+  .md-callout-insight {
+    border-color: #74a56f;
+  }
+
+  .md-callout-insight .md-callout-title {
+    color: #315f2f;
+  }
+
+  .palette-overlay {
+    @apply fixed inset-0 z-50 grid place-items-start bg-black/35 px-4 pt-[12vh];
+  }
+
+  .palette-panel {
+    @apply mx-auto w-full max-w-2xl overflow-hidden rounded-md border shadow-2xl;
+    border-color: var(--line);
+    background: color-mix(in srgb, var(--paper) 92%, white 8%);
+  }
+
+  .palette-header {
+    @apply flex items-center gap-2 border-b p-3;
+    border-color: var(--line);
+  }
+
+  .palette-input {
+    @apply min-h-11 w-full rounded-sm border px-3 text-sm outline-none;
+    border-color: var(--line);
+    color: var(--ink);
+    background: color-mix(in srgb, var(--paper) 86%, white 14%);
+  }
+
+  .palette-input:focus {
+    box-shadow: 0 0 0 2px color-mix(in srgb, var(--moss) 35%, transparent);
+  }
+
+  .palette-kbd {
+    @apply rounded-sm border px-2 py-1 text-[11px] font-semibold;
+    border-color: var(--line);
+    color: var(--muted);
+  }
+
+  .palette-list {
+    @apply max-h-[56vh] overflow-y-auto p-2;
+  }
+
+  .palette-item {
+    @apply grid w-full gap-0.5 rounded-sm px-3 py-2 text-left transition;
+  }
+
+  .palette-item.is-active,
+  .palette-item:hover {
+    @apply bg-paper-soft;
+  }
+
+  .palette-item-title {
+    @apply text-sm font-semibold;
+    color: var(--ink);
+  }
+
+  .palette-item-desc {
+    @apply text-xs;
+    color: var(--muted);
+  }
+
+  .palette-empty {
+    @apply p-4 text-sm;
+    color: var(--muted);
   }
 }

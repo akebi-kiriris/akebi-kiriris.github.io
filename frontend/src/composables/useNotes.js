@@ -1,5 +1,3 @@
-import Fuse from 'fuse.js'
-
 import { parseMarkdownFile } from '@/services/markdown'
 
 const modules = import.meta.glob('../content/notes/*.md', {
@@ -15,22 +13,29 @@ const notes = Object.entries(modules)
   })
   .sort((a, b) => b.date.localeCompare(a.date))
 
-const searchIndex = new Fuse(notes, {
-  keys: ['title', 'summary', 'tags', 'body'],
-  threshold: 0.35,
-})
-
 export function useNotes() {
   function findNote(slug) {
     return notes.find((note) => note.slug === slug)
   }
 
   function searchNotes(query) {
-    if (!query.trim()) {
+    const term = query.trim().toLowerCase()
+    if (!term) {
       return notes
     }
 
-    return searchIndex.search(query).map((result) => result.item)
+    return notes.filter((note) => {
+      const haystack = [
+        note.title,
+        note.summary,
+        note.body,
+        ...(note.tags || []),
+      ]
+        .join(' ')
+        .toLowerCase()
+
+      return haystack.includes(term)
+    })
   }
 
   return {
