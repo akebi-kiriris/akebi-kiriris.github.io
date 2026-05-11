@@ -3,7 +3,10 @@ import { computed, ref, watch } from 'vue'
 
 import MarkdownArticle from '@/components/notes/MarkdownArticle.vue'
 import ProjectDocNavigator from '@/components/projects/ProjectDocNavigator.vue'
+import ProjectTimeline from '@/components/projects/ProjectTimeline.vue'
 import { useProjects } from '@/composables/useProjects'
+import { projectHighlights } from '@/data/projectHighlights'
+import { projectTimelines } from '@/data/projectTimelines'
 
 const props = defineProps({
   slug: {
@@ -33,7 +36,27 @@ const recommendedDocs = computed(() => {
     return []
   }
 
-  return project.value.documents.slice(0, 3)
+  const highlights = projectHighlights[project.value.slug] || []
+  const highlightedDocs = highlights
+    .map((highlight) => {
+      const doc = project.value.documents.find((item) => item.slug === highlight.docSlug)
+      return doc ? { ...doc, reason: highlight.reason } : null
+    })
+    .filter(Boolean)
+
+  if (highlightedDocs.length) {
+    return highlightedDocs
+  }
+
+  return project.value.documents.slice(0, 3).map((doc) => ({ ...doc, reason: '推薦閱讀' }))
+})
+
+const timelineItems = computed(() => {
+  if (!project.value) {
+    return []
+  }
+
+  return projectTimelines[project.value.slug] || []
 })
 
 const filteredDocuments = computed(() => {
@@ -121,6 +144,8 @@ watch(project, () => {
       </header>
 
       <section class="mt-8 grid gap-4">
+        <ProjectTimeline :items="timelineItems" />
+
         <div
           v-if="recommendedDocs.length"
           class="creator-band grid gap-2 p-3 md:p-4"
@@ -131,9 +156,10 @@ watch(project, () => {
               v-for="doc in recommendedDocs"
               :key="doc.slug"
               :to="`/projects/${project.slug}/${doc.slug}`"
-              class="rounded-sm border border-line px-3 py-2 text-sm font-semibold text-ink no-underline transition hover:bg-paper"
+              class="rounded-sm border border-line px-3 py-2 text-ink no-underline transition hover:bg-paper"
             >
-              {{ doc.title }}
+              <span class="block text-xs font-semibold text-clay">{{ doc.reason }}</span>
+              <span class="mt-1 block text-sm font-semibold">{{ doc.title }}</span>
             </RouterLink>
           </div>
         </div>
