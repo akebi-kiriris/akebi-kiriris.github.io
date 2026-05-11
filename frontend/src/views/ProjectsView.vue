@@ -9,7 +9,7 @@ const { projects } = useProjects()
   <main class="content-shell py-10 md:py-16">
     <section class="mt-6">
       <p class="meta-text">專案</p>
-      <h1 class="mt-3 max-w-[14ch] font-display text-5xl leading-tight md:text-7xl text-ink">
+      <h1 class="mt-3 max-w-200 font-display text-5xl leading-tight md:text-7xl text-ink">
         值得被說清楚的作品
       </h1>
       <p class="mt-4 max-w-3xl text-lg leading-8 text-muted">

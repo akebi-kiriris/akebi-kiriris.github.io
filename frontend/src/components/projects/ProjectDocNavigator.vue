@@ -1,4 +1,6 @@
 <script setup>
+import { computed, ref, watch } from 'vue'
+
 const props = defineProps({
   projectSlug: {
     type: String,
@@ -16,21 +18,55 @@ const props = defineProps({
     type: String,
     default: '',
   },
-  previousDoc: {
-    type: Object,
-    default: null,
-  },
-  nextDoc: {
-    type: Object,
-    default: null,
-  },
 })
+
+const pageSize = 10
+const page = ref(0)
+
+const totalPages = computed(() => Math.max(1, Math.ceil(props.documents.length / pageSize)))
+
+const pagedDocuments = computed(() => {
+  const start = page.value * pageSize
+  return props.documents.slice(start, start + pageSize)
+})
+
+watch(
+  () => props.documents,
+  () => {
+    if (page.value > totalPages.value - 1) {
+      page.value = totalPages.value - 1
+    }
+  },
+  { deep: true },
+)
+
+watch(
+  () => props.activeDocSlug,
+  (slug) => {
+    if (!slug || slug === 'about') {
+      return
+    }
+    const idx = props.documents.findIndex((doc) => doc.slug === slug)
+    if (idx >= 0) {
+      page.value = Math.floor(idx / pageSize)
+    }
+  },
+  { immediate: true },
+)
+
+function prevPage() {
+  page.value = Math.max(0, page.value - 1)
+}
+
+function nextPage() {
+  page.value = Math.min(totalPages.value - 1, page.value + 1)
+}
 </script>
 
 <template>
   <aside class="surface-panel lg:sticky lg:top-20">
     <p class="meta-text">專案導覽</p>
-    <h3 class="mt-2 font-display text-3xl leading-tight text-ink">{{ projectTitle }}</h3>
+    <h3 class="mt-2 min-w-0 break-all font-display text-3xl leading-tight text-ink">{{ projectTitle }}</h3>
     <p class="mt-2 text-sm text-muted">共 {{ documents.length }} 篇文件</p>
     <RouterLink
       :to="`/projects/${projectSlug}/about`"
@@ -44,12 +80,34 @@ const props = defineProps({
       About（專案介紹）
     </RouterLink>
 
-    <nav class="mt-4 grid gap-2" aria-label="專案文件">
+    <div class="mt-4 flex items-center justify-between gap-2">
+      <p class="text-xs font-semibold text-muted">第 {{ page + 1 }} / {{ totalPages }} 組（每組 10 份）</p>
+      <div class="flex items-center gap-2">
+        <button
+          type="button"
+          class="rounded-sm border border-line px-2 py-1 text-xs font-semibold text-muted transition hover:bg-paper-soft disabled:opacity-40"
+          :disabled="page === 0"
+          @click="prevPage"
+        >
+          上一組
+        </button>
+        <button
+          type="button"
+          class="rounded-sm border border-line px-2 py-1 text-xs font-semibold text-muted transition hover:bg-paper-soft disabled:opacity-40"
+          :disabled="page >= totalPages - 1"
+          @click="nextPage"
+        >
+          下一組
+        </button>
+      </div>
+    </div>
+
+    <nav class="mt-2 grid gap-2" aria-label="專案文件">
       <RouterLink
-        v-for="doc in documents"
+        v-for="doc in pagedDocuments"
         :key="doc.slug"
         :to="`/projects/${projectSlug}/${doc.slug}`"
-        class="rounded-sm border px-3 py-2 no-underline transition"
+        class="min-w-0 rounded-sm border px-3 py-2 no-underline transition"
         :class="
           activeDocSlug === doc.slug
             ? 'border-moss bg-paper-soft text-ink'
@@ -57,38 +115,8 @@ const props = defineProps({
         "
       >
         <p class="text-xs font-semibold uppercase tracking-[0.06em]">{{ doc.date || '未標註日期' }}</p>
-        <p class="mt-1 text-sm font-semibold">{{ doc.title }}</p>
+        <p class="mt-1 min-w-0 break-all text-sm font-semibold">{{ doc.title }}</p>
       </RouterLink>
     </nav>
-
-    <div class="mt-5 grid grid-cols-2 gap-2 border-t border-line pt-3">
-      <RouterLink
-        v-if="previousDoc"
-        :to="`/projects/${projectSlug}/${previousDoc.slug}`"
-        class="inline-flex min-h-10 items-center justify-center rounded-sm border border-line px-2 text-xs font-semibold text-muted no-underline transition hover:bg-paper-soft"
-      >
-        上一篇
-      </RouterLink>
-      <span
-        v-else
-        class="inline-flex min-h-10 items-center justify-center rounded-sm border border-line px-2 text-xs font-semibold text-muted opacity-45"
-      >
-        上一篇
-      </span>
-
-      <RouterLink
-        v-if="nextDoc"
-        :to="`/projects/${projectSlug}/${nextDoc.slug}`"
-        class="inline-flex min-h-10 items-center justify-center rounded-sm border border-line px-2 text-xs font-semibold text-muted no-underline transition hover:bg-paper-soft"
-      >
-        下一篇
-      </RouterLink>
-      <span
-        v-else
-        class="inline-flex min-h-10 items-center justify-center rounded-sm border border-line px-2 text-xs font-semibold text-muted opacity-45"
-      >
-        下一篇
-      </span>
-    </div>
   </aside>
 </template>

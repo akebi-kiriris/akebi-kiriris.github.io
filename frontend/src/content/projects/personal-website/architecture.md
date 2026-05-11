@@ -1,7 +1,7 @@
 ---
 title: 架構切分紀錄
 date: 2026-05-11
-tags: [Vue, 架構, Frontend]
+tags: [前端, 架構]
 summary: 將專案內容改為資料夾 + 多篇 md 時，路由與資料模型怎麼拆。
 status: 已整理
 ---

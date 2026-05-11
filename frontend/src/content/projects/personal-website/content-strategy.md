@@ -1,7 +1,7 @@
 ---
 title: 內容策略草稿
 date: 2026-05-12
-tags: [內容, 規劃, Markdown]
+tags: [規劃, 內容策略]
 summary: 定義這個專案裡每篇 md 的角色，避免內容重複。
 status: 草稿
 ---

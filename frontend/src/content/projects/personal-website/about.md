@@ -1,9 +1,9 @@
 ---
 title: Kiriris 個人網站
 date: 2026-05-11
+tags: [前端, 內容策略, 架構, 專案介紹]
 summary: 以 Vue 與 Markdown 建立的內容網站，聚焦可維護的寫作流程與閱讀體驗。
 status: v0 建置中
-tags: [Vue, Markdown, 內容架構]
 ---
 
 ## 問題

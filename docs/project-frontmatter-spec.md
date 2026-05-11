@@ -1,4 +1,4 @@
-﻿# Project Frontmatter 規格（Kiriris）
+# Project Frontmatter 規格（Kiriris）
 
 這份規格用在 `frontend/src/content/projects/<project-slug>/*.md`，目的是讓專案內容格式一致、方便排序、搜尋與後續 UI 顯示。
 
@@ -56,3 +56,7 @@ level: 中階
 ## 與目前實作的關係
 - 現行程式已使用：`title`、`date`、`tags`、`summary`、`status`
 - `readingTime`、`level` 已納入規格，後續可直接接到 UI
+
+
+## Tag 命名標準
+- 請搭配 docs/project-tags-standard.md 使用，避免中英混用（例如 Frontend 應統一為 前端）。

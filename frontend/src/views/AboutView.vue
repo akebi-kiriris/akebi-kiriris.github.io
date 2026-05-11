@@ -1,8 +1,8 @@
 <template>
-  <main class="content-shell max-w-205 py-10 md:py-16">
+  <main class="reading-shell py-10 md:py-16">
     <section class="mt-6">
       <p class="meta-text">關於</p>
-      <h1 class="mt-3 max-w-[14ch] font-display text-5xl leading-tight md:text-7xl text-ink">
+      <h1 class="mt-3 max-w-200 font-display text-5xl leading-tight md:text-7xl text-ink">
         把學習變成看得見的軌跡
       </h1>
       <p class="mt-4 max-w-3xl text-lg leading-8 text-muted">

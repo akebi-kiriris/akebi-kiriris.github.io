@@ -1,9 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=LXGW+WenKai+TC:wght@400;700&family=Noto+Sans+TC:wght@400;500;600;700&display=swap');
 @import 'tailwindcss';
 @import 'highlight.js/styles/github.css';
 
 @theme {
-  --font-display: Georgia, 'Times New Roman', serif;
-  --font-sans: 'Segoe UI', 'Noto Sans TC', sans-serif;
+  --font-display: 'LXGW WenKai TC', 'Noto Serif TC', Georgia, serif;
+  --font-sans: 'Noto Sans TC', 'Segoe UI', sans-serif;
   --font-mono: 'Cascadia Code', 'SFMono-Regular', Consolas, monospace;
   --color-paper: #f8f4ea;
   --color-paper-soft: #efe6d3;
