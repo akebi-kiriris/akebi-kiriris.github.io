@@ -1,9 +1,9 @@
-@import url('https://fonts.googleapis.com/css2?family=LXGW+WenKai+TC:wght@400;700&family=Noto+Sans+TC:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@500;700&family=Noto+Sans+TC:wght@400;500;600;700&display=swap');
 @import 'tailwindcss';
 @import 'highlight.js/styles/github.css';
 
 @theme {
-  --font-display: 'LXGW WenKai TC', 'Noto Serif TC', Georgia, serif;
+  --font-display: 'Noto Serif TC', Georgia, serif;
   --font-sans: 'Noto Sans TC', 'Segoe UI', sans-serif;
   --font-mono: 'Cascadia Code', 'SFMono-Regular', Consolas, monospace;
   --color-paper: #f8f4ea;
@@ -26,7 +26,7 @@
     --clay: #a44f37;
     --glow-a: rgba(164, 79, 55, 0.16);
     --glow-b: rgba(36, 79, 62, 0.15);
-    --dot-color: rgba(21, 33, 29, 0.08);
+    --dot-color: rgba(21, 33, 29, 0.05);
     --color-paper: var(--paper);
     --color-paper-soft: var(--paper-soft);
     --color-ink: var(--ink);
@@ -111,11 +111,12 @@
     min-height: 100vh;
     color: var(--ink);
     background:
+      linear-gradient(to bottom, color-mix(in srgb, var(--paper) 88%, white 12%) 0%, var(--paper) 24%, var(--paper) 100%),
       radial-gradient(circle at 12% 8%, var(--glow-a), transparent 24rem),
       radial-gradient(circle at 86% 16%, var(--glow-b), transparent 28rem),
-      radial-gradient(circle, var(--dot-color) 0.9px, transparent 1.2px),
-      var(--paper);
-    background-size: auto, auto, 24px 24px, auto;
+      linear-gradient(to right, transparent, var(--dot-color), transparent);
+    background-size: auto, auto, auto, 100% 1px;
+    background-repeat: no-repeat;
     font-family: var(--font-sans);
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
@@ -149,6 +150,29 @@
   .meta-text {
     @apply text-xs font-semibold uppercase tracking-[0.08em];
     color: var(--clay);
+  }
+
+  .creator-hero {
+    @apply rounded-md px-5 py-7 md:px-8 md:py-10;
+    background: linear-gradient(
+      136deg,
+      color-mix(in srgb, var(--paper-soft) 82%, white 18%) 0%,
+      color-mix(in srgb, var(--paper) 88%, white 12%) 46%,
+      color-mix(in srgb, var(--paper-soft) 76%, white 24%) 100%
+    );
+    box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--line) 62%, transparent);
+  }
+
+  .creator-band {
+    @apply rounded-md px-4 py-4 md:px-6;
+    background: color-mix(in srgb, var(--paper-soft) 58%, white 42%);
+    box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--line) 52%, transparent);
+  }
+
+  .soft-surface {
+    @apply rounded-md;
+    background: color-mix(in srgb, var(--paper) 90%, white 10%);
+    box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--line) 48%, transparent);
   }
 
   .markdown-article {

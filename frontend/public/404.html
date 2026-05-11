@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>導回 Kiriris 網站中...</title>
+    <script>
+      (function () {
+        const { pathname, search, hash } = window.location
+        const segments = pathname.split('/').filter(Boolean)
+        const base = segments.length > 0 ? `/${segments[0]}/` : '/'
+        const route = pathname.slice(base.length)
+        sessionStorage.setItem('spa-redirect', `${base}${route}${search}${hash}`)
+        window.location.replace(base)
+      })()
+    </script>
+  </head>
+  <body></body>
+</html>

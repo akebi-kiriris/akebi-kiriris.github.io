@@ -28,6 +28,14 @@ const availableTags = computed(() => {
   return [...new Set(project.value.documents.flatMap((doc) => doc.tags || []))]
 })
 
+const recommendedDocs = computed(() => {
+  if (!project.value) {
+    return []
+  }
+
+  return project.value.documents.slice(0, 3)
+})
+
 const filteredDocuments = computed(() => {
   if (!project.value) {
     return []
@@ -100,7 +108,7 @@ watch(project, () => {
     </RouterLink>
 
     <template v-if="project">
-      <header class="mt-4 grid gap-4 border-b border-line pb-8">
+      <header class="creator-hero mt-4 grid gap-4">
         <div class="meta-text flex flex-wrap gap-x-3 gap-y-1">
           <span>{{ project.status || '未標註狀態' }}</span>
           <time v-if="project.date" :datetime="project.date">{{ project.date }}</time>
@@ -112,8 +120,25 @@ watch(project, () => {
         <p class="max-w-3xl text-lg leading-8 text-muted">{{ project.summary }}</p>
       </header>
 
-      <section class="mt-10 grid gap-4">
-        <div class="grid gap-3 rounded-sm border border-line bg-[color-mix(in_srgb,var(--paper)_92%,white_8%)] p-2 md:p-3">
+      <section class="mt-8 grid gap-4">
+        <div
+          v-if="recommendedDocs.length"
+          class="creator-band grid gap-2 p-3 md:p-4"
+        >
+          <p class="meta-text">先看這三篇</p>
+          <div class="grid gap-2 md:grid-cols-3">
+            <RouterLink
+              v-for="doc in recommendedDocs"
+              :key="doc.slug"
+              :to="`/projects/${project.slug}/${doc.slug}`"
+              class="rounded-sm border border-line px-3 py-2 text-sm font-semibold text-ink no-underline transition hover:bg-paper"
+            >
+              {{ doc.title }}
+            </RouterLink>
+          </div>
+        </div>
+
+        <div class="creator-band grid gap-3 p-2 md:p-3">
           <div class="flex flex-wrap items-center gap-2">
             <span class="text-xs font-semibold text-muted">篩選標籤：</span>
             <button
@@ -122,7 +147,7 @@ watch(project, () => {
               :class="
                 selectedTag === '全部'
                   ? 'border-moss bg-paper-soft text-ink'
-                  : 'border-line text-muted hover:bg-paper-soft'
+                  : 'border-line text-muted hover:bg-paper'
               "
               @click="selectedTag = '全部'"
             >
@@ -136,7 +161,7 @@ watch(project, () => {
               :class="
                 selectedTag === tag
                   ? 'border-moss bg-paper-soft text-ink'
-                  : 'border-line text-muted hover:bg-paper-soft'
+                  : 'border-line text-muted hover:bg-paper'
               "
               @click="selectedTag = tag"
             >
@@ -148,7 +173,7 @@ watch(project, () => {
             <RouterLink
               v-if="previousDoc"
               :to="`/projects/${project.slug}/${previousDoc.slug}`"
-              class="inline-flex min-h-10 items-center rounded-sm border border-line px-3 text-left text-sm font-semibold text-muted no-underline transition whitespace-normal hover:bg-paper-soft"
+              class="inline-flex min-h-10 items-center rounded-sm border border-line px-3 text-left text-sm font-semibold text-muted no-underline transition whitespace-normal hover:bg-paper"
             >
               上一篇：{{ previousDoc.title }}
             </RouterLink>
@@ -162,7 +187,7 @@ watch(project, () => {
             <RouterLink
               v-if="nextDoc"
               :to="`/projects/${project.slug}/${nextDoc.slug}`"
-              class="inline-flex min-h-10 items-center rounded-sm border border-line px-3 text-left text-sm font-semibold text-muted no-underline transition whitespace-normal hover:bg-paper-soft"
+              class="inline-flex min-h-10 items-center rounded-sm border border-line px-3 text-left text-sm font-semibold text-muted no-underline transition whitespace-normal hover:bg-paper"
             >
               下一篇：{{ nextDoc.title }}
             </RouterLink>
@@ -186,7 +211,7 @@ watch(project, () => {
           <div class="grid gap-4">
         <article
           v-if="props.docSlug === 'about' && project.aboutHtml"
-          class="rounded-md border border-line bg-[color-mix(in_srgb,var(--paper)_90%,white_10%)] p-4 md:p-6"
+          class="soft-surface p-4 md:p-6"
         >
           <div class="meta-text flex flex-wrap gap-2">
             <span>{{ project.slug }} / about</span>
@@ -197,7 +222,7 @@ watch(project, () => {
 
         <article
           v-else-if="activeDocument"
-          class="rounded-md border border-line bg-[color-mix(in_srgb,var(--paper)_90%,white_10%)] p-4 md:p-6"
+          class="soft-surface p-4 md:p-6"
         >
           <div class="meta-text flex flex-wrap gap-2">
             <span>{{ project.slug }} / {{ activeDocument.slug }}</span>
@@ -208,7 +233,7 @@ watch(project, () => {
           <MarkdownArticle :html="activeDocument.html" />
         </article>
 
-        <section v-else class="rounded-md border border-line bg-[color-mix(in_srgb,var(--paper)_90%,white_10%)] p-6">
+        <section v-else class="soft-surface p-6">
           <h2 class="font-display text-3xl text-ink">目前篩選條件沒有對應文件</h2>
           <p class="mt-3 text-muted">你可以切回「全部」或改選其他標籤。</p>
         </section>

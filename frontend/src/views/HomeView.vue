@@ -1,16 +1,32 @@
 <script setup>
+import { computed } from 'vue'
+
 import NoteCard from '@/components/notes/NoteCard.vue'
 import ProjectCard from '@/components/projects/ProjectCard.vue'
 import { useNotes } from '@/composables/useNotes'
 import { useProjects } from '@/composables/useProjects'
 
 const { notes } = useNotes()
-const { featuredProjects } = useProjects()
+const { featuredProjects, projects } = useProjects()
+
+const latestUpdatedDate = computed(() => {
+  const noteDates = notes.map((note) => note.date).filter(Boolean)
+  const projectDates = projects
+    .flatMap((project) => [project.date, ...project.documents.map((doc) => doc.date)])
+    .filter(Boolean)
+
+  const allDates = [...noteDates, ...projectDates]
+  if (!allDates.length) {
+    return '尚未標註'
+  }
+
+  return allDates.sort().at(-1)
+})
 </script>
 
 <template>
   <main class="content-shell py-10 md:py-16">
-    <section class="grid min-h-[66vh] content-center border-y border-line py-12 md:py-20">
+    <section class="creator-hero grid min-h-[33vh] content-center py-12 md:py-20">
       <p class="meta-text">作品集 / 筆記 / 學習軌跡</p>
       <h1 class="mt-3 max-w-[12ch] font-display text-6xl leading-[0.98] md:text-8xl text-ink">
         Kiriris
@@ -18,6 +34,7 @@ const { featuredProjects } = useProjects()
       <p class="mt-5 max-w-3xl text-lg leading-8 text-muted">
         這是我的個人網站，專門整理專案故事、技術筆記，以及一路上那些值得留下的學習決策。
       </p>
+      <p class="mt-3 text-sm font-semibold text-muted">最新更新：{{ latestUpdatedDate }}</p>
       <div class="mt-8 flex flex-wrap gap-3">
         <RouterLink
           class="inline-flex min-h-11 items-center rounded-sm bg-moss px-4 text-sm font-semibold text-paper no-underline transition hover:-translate-y-0.5"
