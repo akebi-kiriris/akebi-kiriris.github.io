@@ -1,7 +1,7 @@
 ---
 title: Socket.IO 核心學習筆記
 date: 2026-05-11
-tags: [前端, 後端, 除錯, 工程流程]
+tags: [全端, 除錯, 學習筆記]
 summary: 整理「Socket.IO 核心學習筆記」主題，重點包含：- WebSocket 是持久連線，所以「誰是誰」是在連線那一刻就決定的。 握手 (Handshake)：Socket.IO 預設會先用 HTTP Long Polling 嘗試連...
 status: 草稿
 ---

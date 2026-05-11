@@ -32,7 +32,7 @@ const latestUpdatedDate = computed(() => {
         Kiriris
       </h1>
       <p class="mt-5 max-w-3xl text-lg leading-8 text-muted">
-        這是我的個人網站，專門整理專案故事、技術筆記，以及一路上那些值得留下的學習決策。
+        專門整理專案相關筆記、學習筆記，以及值得留下的學習經驗的個人網站。
       </p>
       <p class="mt-3 text-sm font-semibold text-muted">最新更新：{{ latestUpdatedDate }}</p>
       <div class="mt-8 flex flex-wrap gap-3">

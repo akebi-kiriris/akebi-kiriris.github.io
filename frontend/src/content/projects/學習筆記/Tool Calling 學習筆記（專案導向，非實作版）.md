@@ -1,7 +1,7 @@
 ---
 title: Tool Calling 學習筆記（專案導向，非實作版）
 date: 2026-04-06
-tags: [規劃, AI, 後端, 除錯]
+tags: [AI, 學習筆記]
 summary: 整理「Tool Calling 學習筆記（專案導向，非實作版）」主題，重點包含：> 起始日期：2026/04/01   > 學習定位：先建立可落地的 Tool Calling 設計能力，再於專案開發中逐步優化。
 status: 草稿
 ---

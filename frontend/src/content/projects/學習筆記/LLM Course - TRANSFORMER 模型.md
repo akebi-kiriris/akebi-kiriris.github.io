@@ -1,7 +1,7 @@
 ---
 title: LLM Course - TRANSFORMER 模型
 date: 2026-05-11
-tags: [部署, AI, 後端, 學習筆記]
+tags: [AI, 學習筆記]
 summary: 整理「LLM Course - TRANSFORMER 模型」主題，重點包含：> 來源: https://huggingface.co/learn/llm-course/zh-TW/ 1. 自然語言處理
 status: 草稿
 ---

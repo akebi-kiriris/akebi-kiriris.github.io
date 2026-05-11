@@ -1,7 +1,7 @@
 ---
 title: Pytest完整指南
 date: 2026-03-29
-tags: [部署, 後端, 除錯, 工程流程]
+tags: [後端, 除錯, 工程流程, 學習筆記]
 summary: 整理「Pytest完整指南」主題，重點包含：**本專案使用 pytest 進行後端單元測試。本文件涵蓋 pytest 基礎、fixtures、斷言、例外處理、以及在 Learnlink 專案中的實際應用。** 1. [pyt...
 status: 草稿
 ---

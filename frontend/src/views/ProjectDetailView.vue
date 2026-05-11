@@ -254,7 +254,7 @@ watch(project, () => {
             <span>{{ project.slug }} / {{ activeDocument.slug }}</span>
             <time v-if="activeDocument.date" :datetime="activeDocument.date">{{ activeDocument.date }}</time>
           </div>
-          <h2 class="mt-2 break-words font-display text-4xl text-ink md:text-5xl">{{ activeDocument.title }}</h2>
+          <h2 class="mt-2 wrap-break-word font-display text-4xl text-ink md:text-5xl">{{ activeDocument.title }}</h2>
           <p v-if="activeDocument.summary" class="mt-3 text-muted">{{ activeDocument.summary }}</p>
           <MarkdownArticle :html="activeDocument.html" />
         </article>

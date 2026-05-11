@@ -1,7 +1,7 @@
 ---
 title: LangChain 學習筆記（純教學版）
 date: 2026-05-11
-tags: [AI, 後端, 除錯, 學習筆記]
+tags: [AI, 學習筆記]
 summary: 整理「LangChain 學習筆記（純教學版）」主題，重點包含：> 更新日期：2026/04/14   > 目標：用觀念化方式理解 LangChain 的作用、邊界與設計思路。
 status: 草稿
 ---

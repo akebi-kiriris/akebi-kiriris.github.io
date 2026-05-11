@@ -1,7 +1,7 @@
 ---
 title: WebSocket_群組即時聊天計畫
 date: 2026-03-18
-tags: [規劃, 前端, 後端, 工程流程]
+tags: [規劃, 全端, 工程流程]
 summary: 記錄「WebSocket_群組即時聊天計畫」相關內容：- WebSocket 是持久連線，所以「誰是誰」是在連線那一刻就決定的。 - 握手 (Handshake)：Socket.IO 預設會先用 HTTP Long Polling 嘗...
 status: 草稿
 ---

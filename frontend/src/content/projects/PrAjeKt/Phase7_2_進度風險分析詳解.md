@@ -1,7 +1,7 @@
 ---
 title: Phase7_2_進度風險分析詳解
 date: 2026-04-20
-tags: [規劃, 部署, AI, 前端]
+tags: [規劃, 部署, AI, 全端]
 summary: 記錄「Phase7_2_進度風險分析詳解」相關內容：> 更新日期：2026-04-19   > 範圍：Learnlink Phase 7.2（已落地版本）
 status: 草稿
 ---

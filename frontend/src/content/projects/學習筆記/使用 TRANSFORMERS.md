@@ -1,7 +1,7 @@
 ---
 title: 使用 TRANSFORMERS
 date: 2026-05-11
-tags: [規劃, 部署, AI, 後端]
+tags: [AI, 學習筆記]
 summary: 整理「使用 TRANSFORMERS」主題，重點包含：title: 使用 TRANSFORMERS Transformers 模型通常非常大。參數量可能從數百萬到數十億，訓練和部署都相對複雜。此外，幾乎每天都有新模型釋出，而且每種模型...
 status: 草稿
 ---

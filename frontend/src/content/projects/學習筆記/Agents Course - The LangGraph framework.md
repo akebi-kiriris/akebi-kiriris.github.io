@@ -1,7 +1,7 @@
 ---
 title: Agents Course - The LangGraph framework
 date: 2026-05-11
-tags: [規劃, AI, 除錯, 學習筆記]
+tags: [AI, 學習筆記]
 summary: 整理「Agents Course - The LangGraph framework」主題，重點包含：> 來源: https://huggingface.co/learn/agents-course/ - **何時使用 LangGraph？** - 對比 LangGraph 與 L...
 status: 草稿
 ---

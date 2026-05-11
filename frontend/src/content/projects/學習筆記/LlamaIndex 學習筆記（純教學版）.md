@@ -1,7 +1,7 @@
 ---
 title: LlamaIndex 學習筆記（純教學版）
 date: 2026-05-11
-tags: [AI, 後端, 學習筆記]
+tags: [AI, 學習筆記]
 summary: 整理「LlamaIndex 學習筆記（純教學版）」主題，重點包含：> 更新日期：2026/04/14   > 目標：用概念導向方式理解 LlamaIndex 在 RAG 系統中的定位與方法。
 status: 草稿
 ---

@@ -1,7 +1,7 @@
 ---
 title: Phase7_3_RAG_前端對齊與操作規劃
 date: 2026-05-08
-tags: [規劃, AI, 前端, 後端]
+tags: [規劃, AI, 前端, 全端]
 summary: 記錄「Phase7_3_RAG_前端對齊與操作規劃」相關內容：> 最後更新：2026/05/08 >
 status: 草稿
 ---

@@ -1,7 +1,7 @@
 ---
 title: TypeScript學習計畫
 date: 2026-05-11
-tags: [規劃, 部署, 前端]
+tags: [前端, 學習筆記]
 summary: 整理「TypeScript學習計畫」主題，重點包含：> 建立時間：2026/03/02   > 目標：在 Phase 2 功能完善期間同步學習，Phase 3 開始時即可進行漸進式遷移
 status: 草稿
 ---

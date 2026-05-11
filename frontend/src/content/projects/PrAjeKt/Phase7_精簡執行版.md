@@ -1,7 +1,7 @@
 ---
 title: Phase7_精簡執行版
 date: 2026-04-22
-tags: [規劃, 部署, AI, 前端]
+tags: [規劃, 部署, AI, 全端]
 summary: 記錄「Phase7_精簡執行版」相關內容：> **策略**：聚焦降低延期風險與週報成本，分階段精簡交付，避免功能膨脹。   > **基線**：基於 Phase 6.6+ 既有 LangChain/LangGraph 架構，...
 status: 草稿
 ---

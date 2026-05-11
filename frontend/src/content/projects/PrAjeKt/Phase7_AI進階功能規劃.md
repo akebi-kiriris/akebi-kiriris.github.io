@@ -1,7 +1,7 @@
 ---
 title: Phase7_AI進階功能規劃
 date: 2026-04-22
-tags: [規劃, 部署, AI, 前端]
+tags: [規劃, 部署, AI, 全端]
 summary: 記錄「Phase7_AI進階功能規劃」相關內容：**文件狀態**: 決議版（Execution Ready）   **最後更新**: 2026-04-22
 status: 草稿
 ---

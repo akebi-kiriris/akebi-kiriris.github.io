@@ -1,7 +1,7 @@
 ---
 title: 模型上下文協定（MCP）簡介
 date: 2026-05-11
-tags: [規劃, AI, 前端, 後端]
+tags: [規AI, 學習筆記]
 summary: 整理「模型上下文協定（MCP）簡介」主題，重點包含：1. **關鍵概念和術語** - MCP 的定義、M×N 問題及核心術語 2. **架構組件** - Host、Client、Server 的角色與通訊流程
 status: 草稿
 ---

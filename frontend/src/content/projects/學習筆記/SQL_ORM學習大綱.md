@@ -1,7 +1,7 @@
 ---
 title: SQL_ORM學習大綱
 date: 2026-05-11
-tags: [規劃, 部署, 後端]
+tags: [後端, 學習筆記]
 summary: 整理「SQL_ORM學習大綱」主題，重點包含：> 目標：理解 SQL 查詢語法、SQLAlchemy ORM 用法、兩者關係與取捨   > 參考專案：PrAjeKt（`backend/blueprints/tasks.py`、...
 status: 草稿
 ---

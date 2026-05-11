@@ -1,7 +1,7 @@
 ---
 title: Agents Course - Agent簡介
 date: 2026-05-11
-tags: [規劃, 部署, AI, 前端]
+tags: [AI, 學習筆記]
 summary: 整理「Agents Course - Agent簡介」主題，重點包含：> 來源: https://huggingface.co/learn/agents-course/ 1. 甚麼是Agent? - 定義、能力層級、應用場景
 status: 草稿
 ---

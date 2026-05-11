@@ -1,7 +1,7 @@
 ---
 title: Phase7_3_collation_mismatch_runbook
 date: 2026-04-24
-tags: [規劃, 部署, AI, 後端]
+tags: [部署, AI, 後端]
 summary: 記錄「Phase7_3_collation_mismatch_runbook」相關內容：最後更新：2026-04-24 在 PostgreSQL（建議先在 staging）執行：
 status: 草稿
 ---
