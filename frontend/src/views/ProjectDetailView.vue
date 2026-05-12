@@ -226,7 +226,7 @@ watch(project, () => {
           </div>
         </div>
 
-        <div class="grid gap-6 lg:grid-cols-[300px_1fr] lg:items-start">
+        <div class="grid min-w-0 gap-6 lg:grid-cols-[300px_minmax(0,1fr)] lg:items-start">
           <ProjectDocNavigator
             :project-slug="project.slug"
             :project-title="project.title"
@@ -234,7 +234,7 @@ watch(project, () => {
             :active-doc-slug="currentNavSlug"
           />
 
-          <div class="grid gap-4">
+          <div class="grid min-w-0 gap-4">
         <article
           v-if="props.docSlug === 'about' && project.aboutHtml"
           class="soft-surface p-4 md:p-6"

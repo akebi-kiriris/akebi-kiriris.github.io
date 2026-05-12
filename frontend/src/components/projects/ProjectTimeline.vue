@@ -16,7 +16,7 @@ const typeLabels = {
 </script>
 
 <template>
-  <section v-if="items.length" class="creator-band grid gap-4 p-3 md:p-4">
+  <section v-if="items.length" class="creator-band grid min-w-0 gap-4 overflow-hidden p-3 md:p-4">
     <div class="flex flex-col gap-2 md:flex-row md:items-end md:justify-between">
       <div>
         <p class="meta-text">Learning Journey</p>
@@ -29,7 +29,7 @@ const typeLabels = {
       </p>
     </div>
 
-    <ol class="timeline-strip -mx-3 flex snap-x gap-3 overflow-x-auto px-3 pb-2 md:-mx-4 md:px-4">
+    <ol class="timeline-strip -mx-3 flex max-w-full snap-x gap-3 overflow-x-auto px-3 pb-2 md:-mx-4 md:px-4">
       <li
         v-for="(item, index) in items"
         :key="`${item.date}-${item.title}`"

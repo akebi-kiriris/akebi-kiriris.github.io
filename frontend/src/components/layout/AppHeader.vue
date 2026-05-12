@@ -1,4 +1,8 @@
 <script setup>
+import { onMounted, ref } from 'vue'
+
+const COLOR_MODE_STORAGE_KEY = 'kiriris-color-mode'
+const colorMode = ref('light')
 const navItems = [
   { label: '首頁', to: '/' },
   { label: '專案', to: '/projects' },
@@ -6,8 +10,44 @@ const navItems = [
   { label: '關於', to: '/about' },
 ]
 
+onMounted(() => {
+  colorMode.value = getInitialColorMode()
+  applyColorMode(colorMode.value)
+})
+
 function openCommandPalette() {
   window.dispatchEvent(new Event('open-command-palette'))
+}
+
+function getInitialColorMode() {
+  const savedMode = localStorage.getItem(COLOR_MODE_STORAGE_KEY)
+
+  if (savedMode === 'light' || savedMode === 'dark') {
+    return savedMode
+  }
+
+  return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+}
+
+function applyColorMode(mode) {
+  colorMode.value = mode
+  document.documentElement.dataset.colorMode = mode
+  document.documentElement.style.colorScheme = mode
+  localStorage.setItem(COLOR_MODE_STORAGE_KEY, mode)
+}
+
+function toggleColorMode() {
+  const nextMode = colorMode.value === 'dark' ? 'light' : 'dark'
+  const root = document.documentElement
+
+  root.classList.add('is-color-transitioning')
+  applyColorMode(nextMode)
+
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      root.classList.remove('is-color-transitioning')
+    })
+  })
 }
 </script>
 
@@ -30,6 +70,15 @@ function openCommandPalette() {
       >
         搜尋
         <span class="rounded-xs border border-line px-1.5 py-0.5 text-[10px]">Ctrl+K</span>
+      </button>
+      <button
+        type="button"
+        class="color-mode-toggle"
+        :aria-label="colorMode === 'dark' ? '切換為淺色模式' : '切換為深色模式'"
+        :title="colorMode === 'dark' ? '切換為淺色模式' : '切換為深色模式'"
+        @click="toggleColorMode"
+      >
+        <span class="color-mode-toggle__icon" aria-hidden="true"></span>
       </button>
       <nav
         aria-label="主要導覽"

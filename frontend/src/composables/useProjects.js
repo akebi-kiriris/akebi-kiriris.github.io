@@ -49,8 +49,8 @@ const projects = Object.entries(
       .filter((file) => file.docSlug !== 'about')
       .map((file) => ({
         slug: file.docSlug,
-        title: file.title,
-        summary: file.summary,
+        title: normalizeDocumentTitle(file.title, file.docSlug),
+        summary: normalizeDocumentSummary(file.summary, file.body, file.title, file.docSlug),
         date: file.date,
         tags: file.tags,
         status: file.status,
@@ -112,4 +112,61 @@ export function useProjects() {
     findProjectDocument,
     searchProjects,
   }
+}
+
+function normalizeDocumentTitle(title = '', slug = '') {
+  const source = title || slug.split('/').at(-1) || ''
+  return source
+    .replace(/Phase(\d+)(?:_(\d+))?(?:_(\d+))?/gi, (_, major, minor, patch) => {
+      return `Phase ${major}${minor ? `.${minor}` : ''}${patch ? `.${patch}` : ''}`
+    })
+    .replace(/_/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim()
+}
+
+function normalizeDocumentSummary(summary = '', body = '', title = '', slug = '') {
+  const normalizedTitle = normalizeDocumentTitle(title, slug)
+  const stripped = summary
+    .replace(/^記錄「[^」]+」相關內容：?/, '')
+    .replace(/^>\s*/gm, '')
+    .replace(/\s+/g, ' ')
+    .trim()
+
+  if (stripped && !looksLikeDocumentMeta(stripped)) {
+    return stripped
+  }
+
+  return extractSummaryFromBody(body, normalizedTitle)
+}
+
+function looksLikeDocumentMeta(text = '') {
+  return /^(更新日期|最後更新|範圍|版本|狀態|目標)[：:]/.test(text)
+}
+
+function extractSummaryFromBody(body = '', title = '') {
+  const lines = body
+    .split('\n')
+    .map((line) => line.trim())
+    .filter(Boolean)
+
+  const candidate = lines.find((line) => {
+    if (
+      line.startsWith('#') ||
+      line.startsWith('---') ||
+      line.startsWith('|') ||
+      line.startsWith('```')
+    ) {
+      return false
+    }
+
+    const cleanLine = line.replace(/^>\s*/, '').trim()
+    return cleanLine.length >= 18 && !looksLikeDocumentMeta(cleanLine)
+  })
+
+  if (!candidate) {
+    return title ? `整理 ${title} 的背景、實作重點與後續方向。` : ''
+  }
+
+  return candidate.replace(/^>\s*/, '').replace(/\s+/g, ' ').trim()
 }

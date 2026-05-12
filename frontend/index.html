@@ -9,6 +9,12 @@
           sessionStorage.removeItem('spa-redirect')
           history.replaceState(null, '', redirect)
         }
+
+        const savedMode = localStorage.getItem('kiriris-color-mode')
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
+        const mode = savedMode || (prefersDark ? 'dark' : 'light')
+        document.documentElement.dataset.colorMode = mode
+        document.documentElement.style.colorScheme = mode
       })()
     </script>
     <link rel="icon" href="%BASE_URL%favicon.ico">
